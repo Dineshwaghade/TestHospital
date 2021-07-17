@@ -1,0 +1,289 @@
+﻿@model TestHospital.Models.ViewModel
+
+@{
+    ViewBag.Title = "AddPatientDetails";
+}
+
+<h2>Patient Details</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+<br />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group d-flex">
+                    @Html.LabelFor(model => model.PatientVM.FirstName, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.PatientVM.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PatientVM.FirstName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group d-flex">
+                    @Html.LabelFor(model => model.PatientVM.LastName, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.PatientVM.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PatientVM.LastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group d-flex">
+                    @Html.LabelFor(model => model.PatientVM.Age, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.PatientVM.Age, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PatientVM.Age, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group d-flex">
+                    @Html.LabelFor(model => model.PatientVM.City, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @*@Html.EditorFor(model => model.PatientVM.City , new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.DropDownListFor(model => model.PatientVM.City, @ViewBag.clist as SelectList, "--Select Category--", new { @class = "form-control" })
+
+                        @Html.ValidationMessageFor(model => model.PatientVM.City, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group d-flex">
+                    @Html.LabelFor(model => model.PatientVM.DOB, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.PatientVM.DOB, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PatientVM.DOB, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group d-flex">
+                    @Html.LabelFor(model => model.PatientVM.AdmissionDate, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.PatientVM.AdmissionDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PatientVM.AdmissionDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group d-flex">
+                    @Html.LabelFor(model => model.PatientVM.Hospital , htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.PatientVM.Hospital, new SelectList(""), "--Select SubCategory--", new { @class = "form-control" })
+                        @*@Html.EditorFor(model => model.PatientVM.Hospital, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.ValidationMessageFor(model => model.PatientVM.Hospital, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group d-flex">
+                    @Html.LabelFor(model => model.PatientVM.DischargeDate, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.PatientVM.DischargeDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PatientVM.DischargeDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group d-flex">
+                    @Html.LabelFor(model => model.PatientVM.TotalAmount, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @*@Html.EditorFor(model => model.PatientVM.TotalAmount, new { htmlAttributes = new { @class = "form-control" } })*@
+                        <input type="number" value="0" id="totalamt" class = "form-control" disabled/>
+                        @Html.ValidationMessageFor(model => model.PatientVM.TotalAmount, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+           
+            </div>
+        </div>
+
+        <div class="float-end">
+            <div class="col-md-offset-2 col-md-10">
+                <!-- Button trigger modal -->
+            
+                <input type="button" value="Add Test" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="resetForm()" />
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <table class="table table-striped " id="patientList">
+            <thead>
+                <tr>
+                    <th scope="col">Test Name</th>
+                    <th scope="col">Test Date</th>
+                    <th>Test Price</th>
+                    <th>Test Result</th>
+                    <th>Doctor Remark</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div class="text-center">
+            <input type="submit" value="Submit" class="btn btn-success" id="btnsubmit" />
+        </div>
+    </div>
+    
+}
+   <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <form onsubmit="event.preventDefault(); onFormSubmit();" autocomplete="off">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Test Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group d-flex">
+                                    @Html.LabelFor(model => model.TestVM.TestName, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        <input type="text" name="TestName" id="TestName" class="form-control" } />
+                                        <label class="text-danger d-none" id="TestNameValidationError">This field is required</label>
+                                     
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group d-flex">
+                                    @Html.LabelFor(model => model.TestVM.TestDate, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        @*@Html.EditorFor(model=>model.TestVM.TestDate,new {id="TestDate" })*@
+                                        <input type="date" name="TestDate" id="TestDate" class="form-control" />
+                                        <label class="text-danger d-none" id="TestDateValidationError">This field is required</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group d-flex">
+                                    @Html.LabelFor(model => model.TestVM.TestPrice, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        <input type="number" name="TestPrice" id="TestPrice" class="form-control" />
+                                        <label class="text-danger d-none" id="TestPriceValidationError">This field is required</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group d-flex">
+                                    @Html.LabelFor(model => model.TestVM.TestResult, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        <input type="text" name="TestResult" id="TestResult" class="form-control" />
+                                        <label class="text-danger d-none" id="TestResultValidationError">This field is required</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group d-flex">
+                                    @Html.LabelFor(model => model.TestVM.DoctorRemarks, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        <textarea type="text" name="DoctorRemarks" id="DoctorRemarks" class="form-control"></textarea>
+                                        @*<input type="text" name="DoctorRemarks" id="DoctorRemarks" class="form-control" />*@
+                                        <label class="text-danger d-none" id="DoctorRemarksValidationError">This field is required</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                         
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    @*<button type="button" class="btn btn-primary" onclick="onFormSubmit();"data-dismiss="modal" id="onsubmit">Save</button>*@
+                    <button type="button" class="btn btn-primary" onclick="onFormSubmit();" id="onsubmit1">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/CustomScript/custom.js"></script>
+
+<script type="text/javascript">
+    $("#btnsubmit").click(function () {
+
+        console.log("btnSave Triggered!");
+
+    });
+</script>
+
+<script type="text/javascript">
+    $("#btnsubmit").click(function () {
+        console.log("btnSave Triggered!");
+
+        var TestModelList = new Array();
+        $("#patientList tbody tr").each(function () {
+            var row = $(this);
+            var TestModel = {};
+            TestModel.TestName = row.find("td").eq(0).html();
+            TestModel.TestDate = row.find("td").eq(1).html();
+            TestModel.TestPrice = row.find("td").eq(2).html();
+            TestModel.TestResult = row.find("td").eq(3).html();
+            TestModel.DoctorRemarks = row.find("td").eq(4).html();
+            TestModelList.push(TestModel);
+        });
+        console.log(TestModelList);
+
+        $.ajax({
+            type: "POST",
+            url: "/Home/AddTest",
+            data: JSON.stringify(TestModelList),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                alert(data);
+            }
+        });
+    });
+</script>
+
+@*<script src="~/Scripts/jquery-3.6.0.min.js"></script>*@
+
+<script>
+    $(document).ready(function () {
+        $('#PatientVM_City').change(function () {
+            console.log('enter');
+            var cid = $(this).val();
+            $.ajax({
+                type: 'POST',
+                url: '/home/GetHospitalListByCid?cid=' + cid,
+                contentType: 'html',
+                success: function (response) {
+                    $('#PatientVM_Hospital').empty();
+                    $('#PatientVM_Hospital').append(response);
+                }
+            });
+        });
+    })
+</script>
